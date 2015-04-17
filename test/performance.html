@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<script type="text/html" id="tmpl-demo">
+	<h3>{%=o.title%}</h3>
+	<p>
+		Released under the
+		<a href="{%=o.license.url%}">{%=o.license.name%}</a>
+		.
+	</p>
+	<h4>Features</h4>
+	<ul>
+		<!--% for (var i=0; i <o.features.length; i++) { %-->
+		<li>{%=o.features[i]%}</li>
+		<!--% } %-->
+	</ul>
+</script>
+	<script src="../js/tmpl.js"></script>
+	<script>
+		var data = {
+			"title" : "JavaScript Templates",
+			"license" : {
+				"name" : "MIT license",
+				"url" : "http://www.opensource.org/licenses/MIT"
+			},
+			"features" : [ "lightweight & fast", "powerful",
+					"zero dependencies" ]
+		};
+
+		var template = document.getElementById('tmpl-demo').innerHTML;
+		var t1 = new Date().getTime();
+		for (var i = 0; i < 100; i++) {
+			var result = tmpl(template, data);
+		}
+		var t2 = new Date().getTime();
+		alert(t2 - t1);
+	</script>
+</body>
+</html>
